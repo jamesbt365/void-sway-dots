@@ -1,0 +1,37 @@
+{
+    "height": 24,
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["clock"],
+    "modules-right": ["pulseaudio", "cpu", "memory", "battery", "tray"],
+    
+    "tray": {
+        "spacing": 10
+    },
+    "clock": {
+        "format": "{:%H:%M %Y-%m-%d }"
+    },
+    "cpu": {
+        "format": "CPU: {usage}%"
+    },
+    "memory": {
+        "format": "RAM: {used:0.1f} G/ {total:0.1f}G"
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}%"
+    },
+    "pulseaudio": {
+        "format": "VOL: {volume}%",
+        "format-muted": "󰝟",
+        "on-click": "pavucontrol"
+    },
+    "sway/workspaces": {
+        "disable-scroll": false,
+        "disable-markup" : false,
+        "all-outputs": true
+    }
+}
+
