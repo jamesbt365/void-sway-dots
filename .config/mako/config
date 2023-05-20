@@ -1,4 +1,4 @@
-layer=top
+layer=overlay
 output=HDMI-A-1
 markup=1
 anchor=top-right

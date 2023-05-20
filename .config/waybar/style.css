@@ -1,13 +1,16 @@
 * {
     border: none;
     border-radius: 0;
-    font-size: 13px;
+    font-size: 12px;
     min-height: 0;
 }
 
 window#waybar {
-    background: #282828;
+    background-color: #252638;
     color: #ffffff;
+    border-bottom: 4px solid #54567b;
+    transition-property: background-color;
+    transition-duration: .35s;
 }
 
 #window {
@@ -15,52 +18,77 @@ window#waybar {
     font-family: "Hack";
 }
 
-#tags button {
-    padding: 1px 5px;
-    background-color: transparent;
+#workspaces button {
+    padding: 1 5px;
+    margin-right: 4px;
+    background-color: #2f324a;
     color: #ffffff;
-	padding-top: 3px;
-	border-bottom: 3px solid transparent;
-}
-#tags button:hover {
-    box-shadow: inherit;
-	text-shadow: inherit;
-	background: inherit;
+    border-bottom: 4px solid #53566e;
 }
 
-#tags button.focused {
-	padding-top: 3px;
-	border-bottom: 3px solid #00a6ff;
-}
-#tags button.occupied {
-	font-weight: bold;
-}
-#tags button.urgent {
-	padding-top: 3px;
-	border-bottom: 3px solid #cc241d;
+#workspaces button:hover {
+    background-color: #2f324a;
+    border-bottom: 4px solid #9aebe9;
 }
 
-#battery, #cpu, #memory, #pulseaudio, #tray {
-    padding: 0 3px;
-    margin: 0 2px; 
+#workspaces button.focused {
+    background-color: #2f324a;
+    border-bottom: 4px solid #9aebe9;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+    border-bottom: 4px solid #9aebe9;
+}
+
+
+#pulseaudio, #cpu, #memory, #battery, #pulseaudio, #tray {
+    padding: 0 10px;
+    margin: 0 2px;
+}
+
+#pulseaudio {
+    background-color: #2f324a;
+    border-bottom: 4px solid #79ccc2;
+}
+#cpu {
+    background-color: #2f324a;
+    border-bottom: 4px solid #fed48f;
+}
+
+#memory {
+    background-color: #2f324a;
+    border-bottom: 4px solid #68f994;
+}
+
+#battery {
+    background-color: #2f324a;
+    border-bottom: 4px solid #f291a1;
+}
+
+#tray {
+    background-color: #2f324a;
+    border-bottom: 4px solid #fd5fcb;
 }
 
 #clock {
     font-weight: bold;
+    background-color: #2f324a;
+    color: #FFFFFF;
+    border-bottom: 4px solid #35a17a;
 }
 
 
 #battery.charging, #battery.full, #battery.plugged {
-	padding-top: 3px;
-	border-bottom: 3px solid #00a6ff;
+
+	border-bottom: 4px solid #00a6ff;
 }
 #battery.warning:not(.charging) {
 	color: #e6e600;
-	padding-top: 3px;
-	border-bottom: 3px solid #e9ac11;
+	border-bottom: 6px solid #e9ac11;
 }
 #battery.critical:not(.charging) {
     color: #cc3436;
-	padding-top: 3px;
-	border-bottom: 3px solid #cc241d;
+
+	border-bottom: 7px solid #cc241d;
 }

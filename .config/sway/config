@@ -12,31 +12,38 @@ set {
 
     $resize 15px
 
-    $screenshot grim -g "$(slurp)" ~/pictures/sway-ss/$(date +%Y-%m-%d_%H-%M-%S).png - | wl-copy
+    $screenshot grim -g "$(slurp)" - | wl-copy
+    $modeline-81hz modeline 239.25 1920 2064 2264 2608 1080 1083 1088 1134 -hsync +vsync
 }
 
-output * bg ~/pictures/wallpapers/Void_wallpaper.png fill
 
+
+output * bg ~/Pictures/wallpapers/yea.jpeg fill
 # Displays
-output HDMI-A-1 resolution 1920x1080@144hz position 0,0 max_render_time 2
-output eDP-1 resolution 1920x1080 position 1920,0
+output HDMI-A-1 resolution 1920x1080@144hz position 0,0 max_render_time 2 adaptive_sync no transform 0
+output eDP-1 position 1920,0 resolution 1920x1080@60hz 
+# Can also use the modeline to use 81hz though it washes out colours.
+
 
 mouse_warping none
 input * {
     xkb_model "pc104"
-    xkb_layout "gb,gb,canary"
+    xkb_layout "gb,gb,canary,us"
     xkb_variant "dvorak,"
     xkb_options "grp:alt_shift_toggle"
     
     repeat_delay 200
     repeat_rate 40
-    
     accel_profile flat
-    pointer_accel -0.25
+    pointer_accel -0.1
 }
 
+input "3141:25903:Glorious_GMMK_TKL_Mouse" {
+    pointer_accel -0.8
+    scroll_factor 0.04
+}
 # Autotiling
-exec_always autotiling
+exec autotiling
 
 # Notifications
 exec mako
@@ -56,7 +63,7 @@ bindsym {
     $mod+p exec $menu
     $mod+Shift+r reload
     $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-
+    $mod+Shift+l exec swaylock -f -c 000000
     Print exec $screenshot
 
     # Switch workspace
@@ -119,6 +126,17 @@ bindsym {
     $mod+Ctrl+Down resize grow height $resize
     $mod+Ctrl+Up resize shrink height $resize
     $mod+Ctrl+Right resize grow width $resize
+
+    $mod+Grave exec makoctl dismiss
+    $mod+Shift+Grave exec makoctl restore
+
+
+    $mod+F8 exec mpc prev
+    $mod+F9 exec mpc toggle
+    $mod+F10 exec mpc next
+    $mod+shift+F6 exec mpc volume -2
+    $mod+shift+F7 exec mpc volume +2
+
 }
 
 workspace 1 output HDMI-A-1
@@ -138,6 +156,7 @@ floating_modifier $mod normal
 default_border pixel 3
 gaps inner 4
 gaps outer 2
+
 # Theming
 set {
     $accent #6472b7
@@ -150,7 +169,7 @@ client.focused_inactive $darkgray $darkgray $accent   $darkgray $darkgray
 client.unfocused        $darkgray $darkgray $accent   $darkgray $darkgray
 client.urgent           $red      $red      $accent   $red      $red
 
-set $gnome-schema org.gnome.desktop.interface
+set $gnome-schema org.gnome.desktop.interface0
 exec_always {
    gsettings set $gnome-schema gtk-theme "Dracula"
    gsettings set $gnome-schema icon-theme "gruvbox-dark-icons-gtk"
@@ -158,7 +177,18 @@ exec_always {
    gsettings set $gnome-schema font-name 'Roboto 12'
    gsettings set org.gnome.desktop.wm.preferences button-layout "" 
 }
-exec pipewire
-exec pipewire-pulse
-exec wireplumber
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+#exec pipewire
+#exec pipewire-pulse
+#exec wireplumber
 
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+
+#swayfx-git
+corner_radius 8
+smart_corner_radius on
+shadows on
+shadow_blur_radius 10
+blur enable
+scratchpad_minimize disable
